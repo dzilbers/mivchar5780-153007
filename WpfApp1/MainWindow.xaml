@@ -1,0 +1,69 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+    <Window.Resources>
+        <LinearGradientBrush x:Key="myLinearGradientBrush">
+            <GradientStop Color="Blue" Offset="0" />
+            <GradientStop Color="Yellow" Offset="0.5" />
+            <GradientStop Color="Red" Offset="1" />
+        </LinearGradientBrush>
+        <local:MyData x:Key="mySource" User="Dani" Password="123456" />
+    </Window.Resources>
+    <Grid Background="{StaticResource myLinearGradientBrush}">
+        <ListBox HorizontalAlignment="Left" Height="100" Margin="10,10,0,0"
+                 VerticalAlignment="Top" Width="100" x:Name="listBox"
+                 SelectionChanged="listBox_SelectionChanged"
+                 SelectionMode="Multiple">
+            <ListBox.Items>
+                <ListBoxItem Content="Oshri"/>
+                <ListBoxItem Content="Ezra"/>
+                <ListBoxItem Content="Dani"/>
+                <ListBoxItem Content="Aviram"/>
+                <ListBoxItem Content="David"/>
+            </ListBox.Items>
+        </ListBox>
+        <ComboBox HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top" Width="120"  x:Name="comboBox" SelectionChanged="comboBox_SelectionChanged">
+            <ComboBox.Items>
+                <ComboBoxItem Content="Oshri"/>
+                <ComboBoxItem Content="Ezra"/>
+                <ComboBoxItem Content="Dani"/>
+                <ComboBoxItem Content="Aviram"/>
+                <ComboBoxItem Content="David"/>
+            </ComboBox.Items>
+        </ComboBox>
+        <Button x:Name="button1" Content="Change" HorizontalAlignment="Left" Margin="115,37,0,0" VerticalAlignment="Top" Width="120" Click="button1_Click"/>
+        <Label x:Name="label1" HorizontalAlignment="Left" Height="23" Margin="14,115,0,0" VerticalAlignment="Top" Width="96"/>
+        <Label x:Name="label2" HorizontalAlignment="Left" Height="23" Margin="115,115,0,0" VerticalAlignment="Top" Width="96"/>
+        <Button x:Name="button2" HorizontalAlignment="Left" Height="62" Margin="14,143,0,0" VerticalAlignment="Top" Width="221">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/trump.jpg" Width="100" />
+                    <TextBlock Text="President Trump" VerticalAlignment="Center" Margin="10" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <StackPanel Margin="0,210,0,10"><!--Background="{Binding Source={x:Static s:MySettings.BackgroundColor}}"-->
+            <Label>Disclaimer: Please don't violate the license conditions</Label>
+            <CheckBox x:Name="chkBoxAgree" Content="I Agree" IsChecked="False" />
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Prev"/>
+                <Button Content="Next" IsEnabled="{Binding ElementName=chkBoxAgree, Path=IsChecked}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Background="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}}" Width="100" Name="txtBox"
+                         Text="{Binding Path=Color, Mode=TwoWay}"/>
+                <TextBox x:Name="myUser" Text="{Binding Source={StaticResource mySource}, Path=User, Mode=TwoWay}"  Width="100"/>
+                <TextBox Text="{x:Static local:MyData.MaxUsersString}"  Width="20"/>
+                <TextBox Text="{Binding Source={x:Static local:MyData.MaxUsersString}, Mode=OneTime}"  Width="20"/>
+                <!--TextBox Text="{x:Static local:MyData.MaxUsers}"  Width="20"/-->
+            </StackPanel>
+            <TextBlock x:Name="myTextBlock" Text="{Binding Path=X}"/>
+        </StackPanel>
+    </Grid>
+</Window>
