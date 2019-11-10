@@ -68,6 +68,18 @@ namespace _5780lesson2
         {
             Console.WriteLine("{0},{1}", p1, p2);
         }
+
+        override public string ToString()
+        {
+            return "test";
+        }
+
+        public MyClass() { }
+
+        public static explicit operator MyClass(int number)
+        {
+            return new MyClass() { Number = number };
+        }
     }
 
     /// <summary>
@@ -134,6 +146,10 @@ namespace _5780lesson2
             foreach (int num in nums)
                 Console.Write(" " + num);
             Console.WriteLine();
+
+            Console.WriteLine(obj2);
+
+            MyClass obj8 = (MyClass)5;
         }
     }
 }
