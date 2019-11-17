@@ -16,7 +16,7 @@ namespace lesson3
 
     class MyClass : Dad, IDoing, IEnumerable<int>
     {
-        int[] array = new int[10];
+        int[] array = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
         public int CompareTo(int obj)
         {
@@ -30,12 +30,14 @@ namespace lesson3
 
         public IEnumerator<int> GetEnumerator()
         {
-            return new MyEnumerator(this);
+            return (IEnumerator<int>)array.GetEnumerator();
+            //return new MyEnumerator(this);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new MyEnumerator(this);
+            return array.GetEnumerator();
+            //return new MyEnumerator(this);
         }
 
         class MyEnumerator : IEnumerator<int>
@@ -47,17 +49,16 @@ namespace lesson3
             }
 
             private int index = -1;
-            public int Current {
+            public /*object*/ int Current {
                 get { return coll.array[index]; }
             }
 
             public bool MoveNext()
             {
-                index++;
-                return index < coll.array.Length;
+                return ++index < coll.array.Length;
             }
 
-            object IEnumerator.Current => index;
+            object IEnumerator.Current => coll.array[index];
 
             public void Dispose() { }
 
@@ -78,17 +79,55 @@ namespace lesson3
     }
     class lesson3
     {
+        static IEnumerable<int> func() //    פונקציה שמחזירה אוסף של מספרים
+        {
+            yield return 25;
+            yield return 36;
+        }
+
+        static IEnumerable<int> func1() //    פונקציה שמחזירה אוסף של מספרים
+        {
+            for (int i = 1; i < 20; ++i)
+            {
+                Console.WriteLine("func1: " + i);
+                yield return i;
+            }
+        }
+
+        static IEnumerable<int> ArithSeq(int a0, int d)
+        {
+            yield return a0;
+            while (true)
+            {
+                a0 += d;
+                yield return a0;
+            }
+        }
+
         static void Main(string[] args)
         {
-            MyClass coll = new MyClass();
+            //MyClass coll = new MyClass();
 
-            IEnumerator<int> iter = coll.GetEnumerator();
-            while (iter.MoveNext())
-                Console.WriteLine(iter.Current);
+            //IEnumerator<int> iter = coll.GetEnumerator();
+            //while (iter.MoveNext())
+            //    Console.WriteLine(iter.Current);
 
-            foreach(int i in coll)
-                Console.WriteLine(i);
+            //foreach(var i in coll)
+            //    Console.WriteLine(i);
 
+            //foreach (var i in func1())
+            //{
+            //    if (i > 10) break;
+            //    Console.WriteLine("Loop" + i);
+            //}
+
+            int counter = 0;
+            foreach (int a in ArithSeq(2, 4))
+            {
+                if (++counter >= 10) break;
+                Console.Write(" " + a);
+            }
+            Console.WriteLine();
         }
     }
 }
