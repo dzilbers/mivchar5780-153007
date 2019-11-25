@@ -25,6 +25,7 @@ namespace Exceptions
             catch (Exception e)
             {
                 Console.WriteLine("Ooops" + e.Message);
+                throw new MyException("boom", e);
             }
             if (i < 0) throw new MyException("Oh-la-la");
         }

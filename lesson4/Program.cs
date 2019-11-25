@@ -30,6 +30,11 @@ namespace lesson4
             Console.WriteLine("func2");
             return 2;
         }
+        static int func3(int cntr)
+        {
+            Console.WriteLine("func3");
+            return 3;
+        }
 
         /// <summary>
         /// 
@@ -37,10 +42,10 @@ namespace lesson4
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            MyClass obj = new MyClass();
-            Type metaData1 = obj.GetType();
-            Type metaData2 = typeof(MyClass);
-            //Type metaData3 = typeof(obj);
+            //MyClass obj = new MyClass();
+            //Type metaData1 = obj.GetType();
+            //Type metaData2 = typeof(MyClass);
+            ////Type metaData3 = typeof(obj);
 
             //PrintInfo("", typeof(MyClass));
             //Console.WriteLine("-----------------------------------");
@@ -48,8 +53,8 @@ namespace lesson4
             //PrintInfo("", anonymousObject.GetType());
             //Console.WriteLine("-----------------------------------");
 
-            var obj1 = new { Id = 2222, Name = "Yossi", Age = 2 };
-            var obj2 = new { Id = 2222, Name = "Yossi", Age = 2 };
+            //var obj1 = new { Id = 2222, Name = "Yossi", Age = 2 };
+            //var obj2 = new { Id = 2222, Name = "Yossi", Age = 2 };
             //PrintInfo("", obj1.GetType());
             //PrintInfo("", obj2.GetType());
             //Console.WriteLine("== " + (obj1 == obj2));
@@ -77,11 +82,13 @@ namespace lesson4
             //int i = Int32.Parse("Dani");
 
             //doIt = null;
-            //doIt += func1;
+            //doIt = func1;
             //doIt += func2;
 
+            //Console.WriteLine("-------------------");
             //Console.WriteLine(doIt(10));
 
+            //Console.WriteLine("-------------------");
             //foreach (MyDelegate d in doIt.GetInvocationList())
             //{
             //    Console.WriteLine(d.Method);
@@ -97,8 +104,17 @@ namespace lesson4
             }
             Console.WriteLine();
 
-            myFunction += func1;
-            myFunction += func2;
+            //myFunction += func1;
+            //myFunction += func2;
+
+            //MyDelegate del;
+            //del = func1;
+            //del += func2;
+            //del += func3;
+
+            //int result = del(11);
+
+            //Console.WriteLine(result);
         }
 
         static Func<int, int> myFunction = null;
