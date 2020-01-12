@@ -1,0 +1,13 @@
+﻿<Window x:Class="morningWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:morningWpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid Tag="3" ToolTip="Explanation">
+        <Button x:Name="MyButton" Content="DANI" HorizontalAlignment="Left" Margin="239,159,0,0" VerticalAlignment="Top" Width="256" Height="99" MouseDoubleClick="MyButton_MouseDoubleClick" MouseMove="MyButtonMove" Click="MyButton_Click" Tag="1"/>
+        <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="206,82,0,0" VerticalAlignment="Top" Tag="2"/>
+    </Grid>
+</Window>

@@ -14,13 +14,16 @@
         </Grid.ColumnDefinitions>
         <Button x:Name="button1" Content="Click it" HorizontalAlignment="Left" Margin="22,188,0,0" VerticalAlignment="Top" Width="138" RenderTransformOrigin="-0.507,0.05" Height="58" Grid.Column="2" Click="button1_Click" GotFocus="myGotFocus"/>
         <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="42,57,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox" Grid.Column="2" HorizontalAlignment="Left" Margin="40,41,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboBox" Grid.Column="2" HorizontalAlignment="Left" Margin="40,41,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBox Width="120"/>
+        </ComboBox>
         <RadioButton x:Name="radioButton" Content="RadioButton" HorizontalAlignment="Left" Margin="53,126,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="radioButton1" Content="RadioButton" HorizontalAlignment="Left" Margin="65,164,0,0" VerticalAlignment="Top"/>
         <Image x:Name="image" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="180,71,0,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="40,26,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="listBox" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="199,28,0,0" VerticalAlignment="Top" Width="100"/>
         <TextBox x:Name="textBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="49,123,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Grid HorizontalAlignment="Left" Height="39" Margin="10,89,0,0" VerticalAlignment="Top" Width="35" Grid.Column="1"/>
 
     </Grid>
 </Window>

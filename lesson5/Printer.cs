@@ -16,7 +16,9 @@ namespace lesson5
     }
     public class Printer
     {
-        public string Name { get { return "My Printer"; } }
+        private static int counter = 0;
+        private readonly string name = $"{++counter}";
+        public string Name { get { return name; } }
         public event EventHandler<PrinterEventArgs> PageOver = null;
         private int pageCount = 20;
         private void handlePageOver()
@@ -29,5 +31,11 @@ namespace lesson5
             if (pages <= pageCount) pageCount -= pages;
             else { pageCount = 0; handlePageOver(); }
         }
+
+        public override string ToString()
+        {
+            return $"Printer {Name}: {pageCount} pages loaded";
+        }
+
     }
 }

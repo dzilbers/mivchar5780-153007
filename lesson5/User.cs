@@ -20,9 +20,7 @@ namespace lesson5
 
         private void myPageOver(object source, PrinterEventArgs args)
         {
-            Console.WriteLine("User " + number + ": page over " +
-                "in printer " + (source as Printer).Name +
-                " paper type: " + args.Paper);
+            Console.WriteLine($"User {number}: page over in printer {source}");
         }
     }
 }

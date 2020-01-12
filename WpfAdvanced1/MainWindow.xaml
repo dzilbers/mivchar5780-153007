@@ -1,0 +1,156 @@
+﻿<Window x:Class="WpfAdvanced1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAdvanced1"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="516" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="BtnStyle1" TargetType="Button">
+            <Setter Property="Background" Value="Red"/>
+        </Style>
+        <sys:String x:Key="mystr" >String</sys:String>
+        <sys:Char x:Key="mychr" >a</sys:Char>
+        <local:MyData x:Key="mySource" User="Dani" Password="123456" />
+        <LinearGradientBrush x:Key="myLinearGradientBrush">
+            <GradientStop Color="Yellow" Offset="0" />
+            <GradientStop Color="Blue" Offset="0.9" />
+            <GradientStop Color="Red" Offset="1" />
+        </LinearGradientBrush>
+        <local:IntToString x:Key="IntToStr" />
+        <Style x:Key="trig" TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="Text" Value="DO">
+                    <Setter Property="Background" Value="Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <StackPanel Margin="0,0,0,2">
+    <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="550*"/>
+                <ColumnDefinition Width="243*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="List1" SelectionMode="Single"
+            HorizontalAlignment="Left" Height="226" Margin="46,26,0,0" VerticalAlignment="Top" Width="332" SelectionChanged="List1_SelectionChanged">
+                <ListBox.Items>
+                    <ListBoxItem Content="AAAA"/>
+                    <ListBoxItem Content="BBBB"/>
+                    <ListBoxItem>CCCC</ListBoxItem>
+                    <ListBoxItem>DDDD</ListBoxItem>
+                    <ListBoxItem>
+                        <ListBoxItem.Content>EEEE</ListBoxItem.Content>
+                    </ListBoxItem>
+                </ListBox.Items>
+            </ListBox>
+            <ComboBox x:Name="Combo1" HorizontalAlignment="Left" Height="30" Margin="510,120,0,0" VerticalAlignment="Top" Width="229" Grid.ColumnSpan="2" SelectionChanged="Combo1_SelectionChanged"
+                  ItemsSource="{Binding}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Path=User}"/>
+                            <Label Content="{Binding Path=Password}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Label x:Name="Label1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="78" Margin="479,19,0,0" VerticalAlignment="Top" Width="246"
+               Background="{StaticResource myLinearGradientBrush}"
+               Content="{Binding Source={x:Static local:MyData.MaxPasswordLength}, Mode=OneTime,
+                Converter={StaticResource IntToStr}}"
+               >
+                <Label.DataContext>
+                    <local:MyData Password="asd" User="234234"/>
+                </Label.DataContext>
+            </Label>
+            <CheckBox x:Name="ChkBox" Grid.ColumnSpan="2" Content="I Agree" HorizontalAlignment="Left" Margin="516,184,0,0" VerticalAlignment="Top" IsChecked="false"/>
+            <Button Grid.ColumnSpan="2" Content="{StaticResource mystr}" HorizontalAlignment="Left" Margin="516,252,0,0" VerticalAlignment="Top" Width="75"
+                IsEnabled="{Binding ElementName=ChkBox, Path=IsChecked}" Click="Button_Click"
+                Style="{StaticResource BtnStyle1}"/>
+            <TextBox HorizontalAlignment="Left" Margin="61,169,0,0" TextWrapping="Wrap" Text="Don't DO" VerticalAlignment="Top" Height="30" Width="150"
+                   Style="{StaticResource trig}" Grid.Column="1">
+            </TextBox>
+            <Grid x:Name="grid2" Grid.Column="1" HorizontalAlignment="Left" Margin="28.4,184,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="47,217,0,0" VerticalAlignment="Top" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Birthday:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <DatePicker x:Name="birthdayDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" SelectedDate="{Binding Birthday, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+                <Label Content="Gender:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                <TextBox x:Name="genderTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Gender, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Content="Password:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                <TextBox x:Name="passwordTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Content="Status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                <CheckBox x:Name="statusCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                <Label Content="User:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+                <TextBox x:Name="userTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding User, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <DataGrid x:Name="myDataDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="88,275,61,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="birthdayColumn" Header="Birthday" Width="SizeToHeader">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding Birthday, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender}" Header="Gender" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="passwordColumn" Binding="{Binding Password}" Header="Password" Width="SizeToHeader"/>
+                    <DataGridCheckBoxColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="userColumn" Binding="{Binding User}" Header="User" Width="SizeToHeader"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Border Name="border1" Width="100" Height="30" BorderBrush="Black" >
+            <Border.Background>
+                <SolidColorBrush x:Name="MyBorder" Color="LightBlue" />
+            </Border.Background>
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:1"
+                                            Storyboard.TargetName="MyBorder"
+                                            Storyboard.TargetProperty="Color"
+                                            To="Gray" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:1"
+                                            Storyboard.TargetName="MyBorder"
+                                            Storyboard.TargetProperty="Color"
+                                            To="LightBlue" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+        </Border>
+    </StackPanel>
+</Window>

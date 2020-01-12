@@ -10,9 +10,9 @@ namespace lesson5
         {
             static void Main(string[] args)
             {
-                Printer2 printer = new Printer2();
-                User2 u1 = new User2(printer);
-                User2 u2 = new User2(printer);
+                Printer printer = new Printer();
+                User u1 = new User(printer);
+                User u2 = new User(printer);
                 Console.WriteLine("Please enter pages to print:");
                 int x = int.Parse(Console.ReadLine());
                 printer.Print(x);
