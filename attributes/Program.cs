@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define JACOB
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,16 +10,18 @@ using System.Runtime.InteropServices;
 namespace attributes
 {
 
-    [DebuggerDisplay("Name = {firstName,nq}, Id = {id,h}", Name = "Our best person", Type ="Person")]
+    //[DebuggerDisplay("Name = {firstName,nq}, Id = {id,h}", Name = "Our best person", Type ="Person")]
     class Person
     {
+        [DebuggerDisplay("{id}", Name = "Id Number", Type = "Israeli Id")]
         public int id;
         public string firstName;
         public string lastName;
-        [Obsolete("Stop using this function, use blabla instead of it")]
-        [Conditional("asdasd")]
-        public void Func(/*[DefaultParameterValue(5)]*/int parm) {
-            Console.WriteLine(parm);
+        //[Obsolete("Stop using this function, use blabla instead of it", true)]
+        [Conditional("JACOB")]
+        public void Func(/*[DefaultParameterValue(5)]int parm*/)
+        {
+            Console.WriteLine(/*parm*/"test");
         }
         public override string ToString()
         {
